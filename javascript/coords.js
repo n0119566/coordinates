@@ -7,7 +7,6 @@ coordsButton.addEventListener("click", function(){
   navigator.geolocation.getCurrentPosition(function (position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
-
     coordsDisplay.textContent = `Latitude: ${latitude} Longitude: ${longitude}`;
 
   });

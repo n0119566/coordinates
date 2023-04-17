@@ -9,19 +9,51 @@
     <link rel="stylesheet" href="./css/bootstrap.css" />
   </head>
   <body>
-    <main>
-      <div class="container">
-        <div class="jumbotron radius">
-          <h1>Get your current coordinates</h1>
-          <h3>Click the button</h3>
-
-          <button id="coords" class="btn btn-primary mb-2 mt-2" type="button">Get my Coordinates</button>
-          <p></p>
-
-          <h3 id="display"></h3>
-        </div>
+    <div class="container">
+      <div class="smalltron-footer text-center my-5">
+        <h1>Get your Current Coordinates</h1>
+        <h3>Click the button print them out</h3>
       </div>
-    </main>
-    <script src="javascript/coords.js"></script>
+      <div class="text-center">
+        <button id="coords" class="btn btn-primary mb-2 mt-2" type="button">
+          Get my Coordinates
+        </button>
+        <p></p>
+
+        <h3 id="display"></h3>
+      </div>
+    </div>
   </body>
+  <footer class="text-center text-lg-start text-white">
+    <div class="container smalltron-footer my-5">
+      <div class="p-1">
+        <section class="">
+          <div class="row">
+            <div class="col-md-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-2 font-weight-bold">CADZ LLC</h6>
+              <p>Make things better, smarter...</p>
+            </div>
+
+            <div class="col-md-2 mx-auto mt-3">
+              <h6 class="text-uppercase mb-2 font-weight-bold">Products</h6>
+              <p>
+                <a href="products.html" class="text-white">Coming soon</a>
+              </p>
+            </div>
+
+            <div class="col-md-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-2 font-weight-bold">Contact</h6>
+              <p><i class="fas fa-home mr-3"></i> Bend, OR 97703, US</p>
+              <p><i class="fas fa-envelope mr-3"></i> info@MotoMileage.com</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="row mx-auto pt-0">
+          <div class="col-md-12">© 2023 Copyright: CADZ LLC</div>
+        </section>
+      </div>
+    </div>
+  </footer>
+  <script src="javascript/coords.js"></script>
 </html>
