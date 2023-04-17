@@ -1,0 +1,14 @@
+.radius{
+    border-radius: 4rem;
+    border: solid;
+    border-width: 1px;
+    background-color: lightgray;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.total{
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+}

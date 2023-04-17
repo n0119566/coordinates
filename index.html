@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Coordinates</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
   </head>
   <body>
     <main>
-      <h1>Get your current coordinates</h1>
-      <h3>Click the button</h3>
+      <div class="container">
+        <div class="jumbotron radius">
+          <h1>Get your current coordinates</h1>
+          <h3>Click the button</h3>
 
-      <button id="coords" type="button">Get my Coordinates</button>
-      <p></p>
-      
-      <h3 id="display"></h3>
+          <button id="coords" class="btn btn-primary mb-2 mt-2" type="button">Get my Coordinates</button>
+          <p></p>
 
+          <h3 id="display"></h3>
+        </div>
+      </div>
     </main>
     <script src="javascript/coords.js"></script>
   </body>
