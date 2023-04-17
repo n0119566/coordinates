@@ -2,6 +2,7 @@ const coordsButton = document.querySelector("#coords");
 const latDisplay = document.querySelector("#lat");
 const longDisplay = document.querySelector("#long");
 const copyButton = document.querySelector("#copy");
+const copyConfirmation = document.querySelector("#copyConfirm");
 
 coordsButton.addEventListener("click", function () {
   // Get the postion from the browser
@@ -27,5 +28,6 @@ copyButton.addEventListener("click", () => {
   if (lat.length > 0 && long.length > 0) {
     const copyText = lat + " " + long;
     navigator.clipboard.writeText(copyText);
+    copyConfirmation.textContent = "Coordinates Copied...";
   }
 });
