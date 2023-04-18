@@ -18,13 +18,15 @@
   color: white;
   margin: 0.25rem;
   padding: 0.25rem 0.25rem 0.25rem 0.25rem;
-  border-radius: 2rem;
+  border-radius: 1.5rem;
 }
 
 .confirmed {
   color: lightgrey;
   font-family: Arial;
-
   animation: fadeIn 5s;
 }
+
+
+
 
