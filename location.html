@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Coordinates</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+  </head>
+  <body>
+    <div class="">
+      <div class="smalltron-footer text-center my-5">
+        <h1>Get your Location using Coordinates</h1>
+        <h3>Click the button to display</h3>
+      </div>
+      <div class="text-center">
+        <form class="container pt-md-4 pb-md-3">
+          <fieldset class="row mx-auto">
+            <legend>Coordinates</legend>
+            <div class="col-6 pb-2">
+              <label for="latitude" class="form-label">Latitude*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="latitude"
+                name="latitude"
+                required
+              />
+            </div>
+            <div class="col-6">
+              <label for="longitude" class="form-label">Longitude*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="longitude"
+                name="longitude"
+                required
+              />
+            </div>
+          </fieldset>
+        </form>
+        <button
+          id="getLocation"
+          class="btn btn-primary mb-2 mt-2"
+          type="button"
+        >
+          Get Gas Station
+        </button>
+        <button id="getPOIs" class="btn btn-primary mb-2 mt-2" type="button">
+          Get POIs
+        </button>
+        <button id="clear" class="btn btn-primary mb-2 mt-2" type="button">
+          Clear
+        </button>
+
+        <h4 class="pt-4" id="verboseLocation"></h4>
+        <ul class="list-group pt-3" id="poiList"></ul>
+
+        <table id="poiTable" class="container table table-hover thead-light table-bordered table-lg"></table>
+      </div>
+    </div>
+  </body>
+  <footer class="text-center text-lg-start text-white">
+    <div class="smalltron-footer my-5">
+      <div class="p-1">
+        <section class="">
+          <div class="row">
+            <div class="col-md-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-2 font-weight-bold">CADZ LLC</h6>
+              <p>Make things better, smarter...</p>
+            </div>
+
+            <div class="col-md-2 mx-auto mt-3">
+              <h6 class="text-uppercase mb-2 font-weight-bold">Products</h6>
+              <p>
+                <a href="products.html" class="text-white">Coming soon</a>
+              </p>
+            </div>
+
+            <div class="col-md-3 mx-auto mt-3">
+              <h6 class="text-uppercase mb-2 font-weight-bold">Contact</h6>
+              <p><i class="fas fa-home mr-3"></i> Bend, OR 97703, US</p>
+              <p><i class="fas fa-envelope mr-3"></i> info@MotoMileage.com</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="row mx-auto pt-0">
+          <div class="col-md-12">© 2023 Copyright: CADZ LLC</div>
+        </section>
+      </div>
+    </div>
+  </footer>
+  <script src="javascript/location.js"></script>
+  <script src="javascript/tomtom.js"></script>
+  <script src="javascript/keys.js"></script>
+</html>
