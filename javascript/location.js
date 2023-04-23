@@ -8,7 +8,8 @@ const POI_SEARCH = "poi";
 const poiList = document.querySelector("#poiList");
 const poiTable = document.querySelector("#poiTable");
 const clearButton = document.querySelector("#clear");
-const headers = ["Name", "Address", "Business Type"];
+const headers = ["Name", "Address", "Business Type", "Distance"];
+const apiKey = "Mkqt0JQXx0JlI2QILMry1yA7SF3tppae";
 
 // Event listeners - route and perform search based on button
 getLocationButton.addEventListener("click", () => {
@@ -21,6 +22,7 @@ getPOIButton.addEventListener("click", () => {
 clearButton.addEventListener("click", () => {
   latitudeInput.value = "";
   longitudeInput.value = "";
+  verboseLocation.textContent = "";
   clearPOItable();
 });
 
@@ -73,16 +75,21 @@ function buildPOITable(pois) {
   const tbody = document.createElement("tbody");
 
   for (let i = 0; i < pois.length; i++) {
+
+    // To add a new column - create a TD for the value, assign the value, append it
     const tr = document.createElement("tr");
     const name = document.createElement("td");
     const address = document.createElement("td");
     const category = document.createElement("td");
+    const distance = document.createElement("td");
     name.textContent = pois[i].name;
     address.textContent = pois[i].address;
     category.textContent = pois[i].category;
+    distance.textContent = pois[i].distance;
     tr.appendChild(name);
     tr.appendChild(address);
     tr.appendChild(category);
+    tr.appendChild(distance);
     tbody.appendChild(tr);
   }
 
@@ -120,22 +127,6 @@ function clearPOI() {
     i--;
   }
   verboseLocation.textContent = "";
-}
-
-// Define a POI object
-class Poi {
-  constructor(name, address, category, distance) {
-    this.name = name;
-    this.address = address;
-    this.category = category;
-    this.distance = distance;
-    convertedDistance = this.convertDistance(this.distance);
-    
-  }
-   convertDistance() {
-    console.log("Distance" + this.distance);
-    this.distance = this.distance > 50 ? true : false;
-  }
 }
 
 // Clear table results

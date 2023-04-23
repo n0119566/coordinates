@@ -4,6 +4,7 @@ const longDisplay = document.querySelector("#long");
 const copyButton = document.querySelector("#copy");
 const copyConfirmation = document.querySelector("#copyConfirm");
 
+
 coordsButton.addEventListener("click", function () {
   // Get the postion from the browser
   navigator.geolocation.getCurrentPosition(function (position) {
