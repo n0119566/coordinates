@@ -32,7 +32,6 @@ async function getLocations(lat, long, searchType) {
 
     // Get an array of results from the response, should only be 1
     result = data.results;
-    console.log(result);
 
     // Go through the results, create a new POI object for each and add it to the list
     for (let i = 0; i < result.length; i++) {

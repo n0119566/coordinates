@@ -32,7 +32,6 @@ async function getLocationAndUpdateUI(searchType) {
 
   // Call the API and expect to get a location or locations back as array of POIs
   let locations = await getLocations(lat, long, searchType);
-  console.log(locations);
 
   // If we only get back 1 result, print it out
   if (locations.length === 0) {
