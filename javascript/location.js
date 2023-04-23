@@ -30,11 +30,17 @@ async function getLocationAndUpdateUI(searchType) {
 
   // Call the API and expect to get a location or locations back as array of POIs
   let locations = await getLocations(lat, long, searchType);
+  console.log(locations);
 
   // If we only get back 1 result, print it out
   if (locations.length === 0) {
     verboseLocation.textContent = "Nothing found at this location";
+
+    // We do this just in case we've already round something, try again and find nothing
+    clearPOItable();
   } else {
+    // We do this in case we search previously and found nothing but found something this time
+    verboseLocation.textContent = "";
     buildPOITable(locations);
   }
 }
@@ -118,10 +124,17 @@ function clearPOI() {
 
 // Define a POI object
 class Poi {
-  constructor(name, address, category) {
+  constructor(name, address, category, distance) {
     this.name = name;
     this.address = address;
     this.category = category;
+    this.distance = distance;
+    convertedDistance = this.convertDistance(this.distance);
+    
+  }
+   convertDistance() {
+    console.log("Distance" + this.distance);
+    this.distance = this.distance > 50 ? true : false;
   }
 }
 
@@ -132,4 +145,3 @@ function clearPOItable() {
     element.removeChild(element.firstChild);
   }
 }
-
