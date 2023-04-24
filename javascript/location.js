@@ -9,7 +9,7 @@ const poiList = document.querySelector("#poiList");
 const poiTable = document.querySelector("#poiTable");
 const clearButton = document.querySelector("#clear");
 const headers = ["Name", "Address", "Business Type", "Distance"];
-const apiKey = "Mkqt0JQXx0JlI2QILMry1yA7SF3tppae";
+//const apiKey = "Mkqt0JQXx0JlI2QILMry1yA7SF3tppae";
 
 // Event listeners - route and perform search based on button
 getLocationButton.addEventListener("click", () => {
@@ -27,6 +27,12 @@ clearButton.addEventListener("click", () => {
 });
 
 async function getLocationAndUpdateUI(searchType) {
+  if (latitudeInput.value === "" || longitudeInput.value === "") {
+    let coords = await getCoordinates();
+    console.log(coords);
+  }
+
+  console.log("second");
   const lat = latitudeInput.value;
   const long = longitudeInput.value;
 
@@ -74,7 +80,6 @@ function buildPOITable(pois) {
   const tbody = document.createElement("tbody");
 
   for (let i = 0; i < pois.length; i++) {
-
     // To add a new column - create a TD for the value, assign the value, append it
     const tr = document.createElement("tr");
     const name = document.createElement("td");
@@ -134,4 +139,21 @@ function clearPOItable() {
   while (element.firstChild) {
     element.removeChild(element.firstChild);
   }
+}
+
+async function getCoordinates() {
+  let coords = await navigator.geolocation.getCurrentPosition(
+    async function (position) {
+      const latitude = await position.coords.latitude;
+      const longitude = await position.coords.longitude;
+
+      // Add them to input fields
+      latitudeInput.value = latitude;
+      longitudeInput.value = longitude;
+      console.log("first");
+      return "";  
+    }
+    
+  );
+  return coords;
 }
