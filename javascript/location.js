@@ -8,8 +8,9 @@ const POI_SEARCH = "poi";
 const poiList = document.querySelector("#poiList");
 const poiTable = document.querySelector("#poiTable");
 const clearButton = document.querySelector("#clear");
+const coordsButton = document.querySelector("#coords");
 const headers = ["Name", "Address", "Business Type", "Distance"];
-//const apiKey = "Mkqt0JQXx0JlI2QILMry1yA7SF3tppae";
+const apiKey = "Mkqt0JQXx0JlI2QILMry1yA7SF3tppae";
 
 // Event listeners - route and perform search based on button
 getLocationButton.addEventListener("click", () => {
@@ -26,13 +27,19 @@ clearButton.addEventListener("click", () => {
   clearPOItable();
 });
 
-async function getLocationAndUpdateUI(searchType) {
-  if (latitudeInput.value === "" || longitudeInput.value === "") {
-    let coords = await getCoordinates();
-    console.log(coords);
-  }
+coordsButton.addEventListener("click", function () {
+  // Get the postion from the browser
+  navigator.geolocation.getCurrentPosition(function (position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
 
-  console.log("second");
+    // Display them in the browser
+    latitudeInput.value = latitude;
+    longitudeInput.value = longitude;
+  });
+});
+
+async function getLocationAndUpdateUI(searchType) {
   const lat = latitudeInput.value;
   const long = longitudeInput.value;
 
@@ -139,21 +146,4 @@ function clearPOItable() {
   while (element.firstChild) {
     element.removeChild(element.firstChild);
   }
-}
-
-async function getCoordinates() {
-  let coords = await navigator.geolocation.getCurrentPosition(
-    async function (position) {
-      const latitude = await position.coords.latitude;
-      const longitude = await position.coords.longitude;
-
-      // Add them to input fields
-      latitudeInput.value = latitude;
-      longitudeInput.value = longitude;
-      console.log("first");
-      return "";  
-    }
-    
-  );
-  return coords;
 }
