@@ -29,13 +29,18 @@ clearButton.addEventListener("click", () => {
 
 coordsButton.addEventListener("click", function () {
   // Get the postion from the browser
-  navigator.geolocation.getCurrentPosition(function (position) {
+  navigator.geolocation.getCurrentPosition(async function (position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
     // Display them in the browser
     latitudeInput.value = latitude;
     longitudeInput.value = longitude;
+
+    // Get the address for the coords and display it
+    const address = await getCurrentAddress(latitude, longitude);
+
+    verboseLocation.textContent = `Current location: ${address}`;
   });
 });
 
@@ -48,13 +53,18 @@ async function getLocationAndUpdateUI(searchType) {
 
   // If we only get back 1 result, print it out
   if (locations.length === 0) {
-    verboseLocation.textContent = "Nothing found at this location";
+    verboseLocation.textContent =
+      verboseLocation.textContent + " - Nothing found at this address";
 
     // We do this just in case we've already round something, try again and find nothing
     clearPOItable();
   } else {
-    // We do this in case we search previously and found nothing but found something this time
-    verboseLocation.textContent = "";
+    // See if it has part of "nothing found" - if it does, we'll remove that part leaving just address
+    if (verboseLocation.textContent.includes("Nothing")) {
+      verboseLocation.textContent = verboseLocation.textContent
+        .substring(0, verboseLocation.textContent.indexOf("-"))
+        .trim();
+    }
     buildPOITable(locations);
   }
 }
@@ -111,8 +121,7 @@ function buildPOITable(pois) {
 // Build the list of POIs and add it to the HTML
 function buildPOIList(pois) {
   clearPOI();
-  verboseLocation.textContent =
-    "POIs at this Location" || "Unable to get location";
+
   // For each roll, create a list item, add the roll text, and push it to the list.
   for (let i = 0; i < pois.length; i++) {
     const li = document.createElement("li");
@@ -137,7 +146,7 @@ function clearPOI() {
     listItem.remove();
     i--;
   }
-  verboseLocation.textContent = "";
+  // verboseLocation.textContent = "";
 }
 
 // Clear table results
