@@ -1,19 +1,19 @@
-const getLocationButton = document.querySelector("#getLocation");
+const getGasButton = document.querySelector("#getGas");
 const getPOIButton = document.querySelector("#getPOIs");
-const latitudeInput = document.querySelector("#latitude");
-const longitudeInput = document.querySelector("#longitude");
+const locationInput = document.querySelector("#location");
 const verboseLocation = document.querySelector("#verboseLocation");
 const GAS_STATION_SEARCH = "gas";
 const POI_SEARCH = "poi";
-const poiList = document.querySelector("#poiList");
 const poiTable = document.querySelector("#poiTable");
 const clearButton = document.querySelector("#clear");
 const coordsButton = document.querySelector("#coords");
 const headers = ["Name", "Address", "Business Type", "Distance"];
+let browserLong = "";
+let browserLat = "";
 const apiKey = "Mkqt0JQXx0JlI2QILMry1yA7SF3tppae";
 
 // Event listeners - route and perform search based on button
-getLocationButton.addEventListener("click", () => {
+getGasButton.addEventListener("click", () => {
   getLocationAndUpdateUI(GAS_STATION_SEARCH);
 });
 getPOIButton.addEventListener("click", () => {
@@ -21,35 +21,23 @@ getPOIButton.addEventListener("click", () => {
 });
 
 clearButton.addEventListener("click", () => {
-  latitudeInput.value = "";
-  longitudeInput.value = "";
+  locationInput.value = "";
   verboseLocation.textContent = "";
   clearPOItable();
 });
 
-coordsButton.addEventListener("click", function () {
-  // Get the postion from the browser
-  navigator.geolocation.getCurrentPosition(async function (position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-
-    // Display them in the browser
-    latitudeInput.value = latitude;
-    longitudeInput.value = longitude;
-
-    // Get the address for the coords and display it
-    const address = await getCurrentAddress(latitude, longitude);
-
-    verboseLocation.textContent = `Current location: ${address}`;
-  });
-});
-
 async function getLocationAndUpdateUI(searchType) {
-  const lat = latitudeInput.value;
-  const long = longitudeInput.value;
+  // Get the coordinates and the formatted  address for the input field
+  let coordinates = await getCoordinates(locationInput.value);
+  verboseLocation.textContent = coordinates.address;
+  locationInput.value = coordinates.address;
 
   // Call the API and expect to get a location or locations back as array of POIs
-  let locations = await getLocations(lat, long, searchType);
+  let locations = await getLocations(
+    coordinates.latitude,
+    coordinates.longitude,
+    searchType
+  );
 
   // If we only get back 1 result, print it out
   if (locations.length === 0) {
@@ -60,6 +48,7 @@ async function getLocationAndUpdateUI(searchType) {
     clearPOItable();
   } else {
     // See if it has part of "nothing found" - if it does, we'll remove that part leaving just address
+    // TODO: Using a - to splice out the text doesnt work since some addresses have "-" - need better solution
     if (verboseLocation.textContent.includes("Nothing")) {
       verboseLocation.textContent = verboseLocation.textContent
         .substring(0, verboseLocation.textContent.indexOf("-"))
@@ -118,37 +107,6 @@ function buildPOITable(pois) {
   poiTable.appendChild(tbody);
 }
 
-// Build the list of POIs and add it to the HTML
-function buildPOIList(pois) {
-  clearPOI();
-
-  // For each roll, create a list item, add the roll text, and push it to the list.
-  for (let i = 0; i < pois.length; i++) {
-    const li = document.createElement("li");
-
-    // Set the value to display
-    li.innerText = `${pois[i].name} - ${pois[i].address} - ${pois[i].category}`;
-
-    // Add some style via Bootstrap
-    li.classList = "list-group-item";
-    poiList.append(li);
-  }
-}
-
-// Clear the POI list
-function clearPOI() {
-  const listItems = poiList.getElementsByTagName("li");
-
-  // Need to count down since you are removing items
-  let i = listItems.length - 1;
-  while (i >= 0) {
-    const listItem = listItems[i];
-    listItem.remove();
-    i--;
-  }
-  // verboseLocation.textContent = "";
-}
-
 // Clear table results
 function clearPOItable() {
   let element = document.getElementById("poiTable");
@@ -156,3 +114,20 @@ function clearPOItable() {
     element.removeChild(element.firstChild);
   }
 }
+
+/**
+ * Fires when DOM has been loaded - we use it to get the current city and state and pre-populate the search field
+ */
+window.addEventListener("DOMContentLoaded", (event) => {
+  navigator.geolocation.getCurrentPosition(async function (position) {
+    browserLat = position.coords.latitude;
+    browserLong = position.coords.longitude;
+
+    // Get the address for the coords
+    const address = await getCurrentAddress(browserLat, browserLong);
+
+    // Display it in the input field as a starting point and also in the text
+    verboseLocation.textContent = `Current location: ${address}`;
+    locationInput.value = address;
+  });
+});

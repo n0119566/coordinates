@@ -11,40 +11,30 @@
   <body>
     <div class="">
       <div class="smalltron-footer text-center my-5">
-        <h1>Get your Location using Coordinates</h1>
-        <h3>Click the button to display</h3>
+        <h1>Get your location and POIs</h1>
+        <h3>What is around you?</h3>
       </div>
       <div class="text-center">
         <form class="container pt-md-4 pb-md-3">
           <fieldset class="row mx-auto">
-            <legend>Coordinates</legend>
-            <div class="col-6 pb-2">
-              <label for="latitude" class="form-label">Latitude*</label>
+            <legend>Search</legend>
+            <div class="col-6 mx-auto pb-2">
+              <label for="location" class="form-label">Location*</label>
               <input
                 type="text"
                 class="form-control"
-                id="latitude"
-                name="latitude"
+                id="location"
+                name="location"
                 required
               />
-            </div>
-            <div class="col-6">
-              <label for="longitude" class="form-label">Longitude*</label>
-              <input
-                type="text"
-                class="form-control"
-                id="longitude"
-                name="longitude"
-                required
-              />
+              <div id="searchHelp" class="form-text">
+                An address or city and state, e.g 123 Main St, Bend, OR
+              </div>
             </div>
           </fieldset>
         </form>
-        <button id="coords" class="btn btn-primary mb-2 mt-2" type="button">
-          Get Coordinates
-        </button>
         <button
-          id="getLocation"
+          id="getGas"
           class="btn btn-primary mb-2 mt-2"
           type="button"
         >
@@ -58,9 +48,11 @@
         </button>
 
         <h4 class="pt-4" id="verboseLocation"></h4>
-        <ul class="list-group pt-3" id="poiList"></ul>
 
-        <table id="poiTable" class="container table table-hover thead-light table-bordered table-lg"></table>
+        <table
+          id="poiTable"
+          class="container table table-hover thead-light table-bordered table-lg"
+        ></table>
       </div>
     </div>
   </body>

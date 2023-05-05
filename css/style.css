@@ -27,6 +27,13 @@
   animation: fadeIn 5s;
 }
 
-
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  padding-left: 0.5rem;
+  text-align: left;
+  color: gray;
+}
 
 

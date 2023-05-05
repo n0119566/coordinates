@@ -72,6 +72,27 @@ async function getCurrentAddress(lat, long) {
   }
 }
 
+// Get the coordinates for a search string, e.g., City and State
+async function getCoordinates(searchString) {
+  const searchTerm = encodeURIComponent(searchString);
+  const coordSearch = `https://api.tomtom.com/search/2/geocode/${searchTerm}.json?storeResult=false&countrySet=us&view=Unified&key=${apiKey}`;
+  try {
+    const response = await fetch(coordSearch);
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    const data = await response.json();
+
+    // Get an array of results from the response, should only be 1
+    return {latitude: data.results[0].position.lat, longitude: data.results[0].position.lon, address: data.results[0].address.freeformAddress};
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
 // Define a POI object
 class Poi {
   constructor() {
@@ -94,3 +115,5 @@ class Poi {
     }
   }
 }
+
+
