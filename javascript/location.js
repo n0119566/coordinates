@@ -11,6 +11,15 @@ const headers = ["Name", "Address", "Business Type", "Distance"];
 let browserLong = "";
 let browserLat = "";
 const apiKey = "Mkqt0JQXx0JlI2QILMry1yA7SF3tppae";
+const currentLocationButton = document.querySelector("#getYourLocation");
+
+/**
+ * Gets current browser location and populates the search field
+ */
+currentLocationButton.addEventListener("click", async () => {
+  clearPOItable();
+  await getBrowserLocation();
+});
 
 // Event listeners - route and perform search based on button
 getGasButton.addEventListener("click", () => {
@@ -119,6 +128,10 @@ function clearPOItable() {
  * Fires when DOM has been loaded - we use it to get the current city and state and pre-populate the search field
  */
 window.addEventListener("DOMContentLoaded", (event) => {
+  getBrowserLocation();
+});
+
+async function getBrowserLocation() {
   navigator.geolocation.getCurrentPosition(async function (position) {
     browserLat = position.coords.latitude;
     browserLong = position.coords.longitude;
@@ -130,4 +143,4 @@ window.addEventListener("DOMContentLoaded", (event) => {
     verboseLocation.textContent = `Current location: ${address}`;
     locationInput.value = address;
   });
-});
+}

@@ -18,35 +18,43 @@
         <form class="container pt-md-4 pb-md-3">
           <fieldset class="row mx-auto">
             <legend>Search</legend>
-            <div class="mx-auto pb-2">
+            <div class="col-md-8 mx-auto pb-2">
               <label for="location" class="form-label">Location*</label>
-              <input
-                type="text"
-                class="form-control"
-                id="location"
-                name="location"
-                required
-              />
-              <div id="searchHelp" class="form-text">
-                An address or city and state, e.g 123 Main St, Bend, OR
+              <div class="input-with-icon container">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="location"
+                  name="location"
+                  required
+                />
+                <div class="btn btn-default icon">
+                  <a id="getYourLocation"
+                    ><img
+                      class="locationIcon"
+                      id="locationImage"
+                      src="images/location.webp"
+                      alt="Icon for free version of product"
+                  /></a>
+                </div>
+                <div id="searchHelp" class="form-text">
+                  Address or city, state e.g 123 Main St, Bend, OR
+                </div>
               </div>
             </div>
           </fieldset>
         </form>
-        <button
-          id="getGas"
-          class="btn btn-primary mb-2 mt-2"
-          type="button"
-        >
-          Get Gas Station
-        </button>
-        <button id="getPOIs" class="btn btn-primary mb-2 mt-2" type="button">
-          Get POIs
-        </button>
-        <button id="clear" class="btn btn-primary mb-2 mt-2" type="button">
-          Clear
-        </button>
-
+        <div class="pt-4">
+          <button id="getGas" class="btn btn-primary mb-2 mt-2" type="button">
+            Get Gas Station
+          </button>
+          <button id="getPOIs" class="btn btn-primary mb-2 mt-2" type="button">
+            Get POIs
+          </button>
+          <button id="clear" class="btn btn-primary mb-2 mt-2" type="button">
+            Clear
+          </button>
+        </div>
         <h4 class="pt-4" id="verboseLocation"></h4>
 
         <table
